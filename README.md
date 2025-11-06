@@ -1,2 +1,0 @@
-# pertemuan
-pertemuan.php
