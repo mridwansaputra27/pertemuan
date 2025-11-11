@@ -1,0 +1,11 @@
+<?php
+namespace App\Controllers;
+
+use App\Models\Product; // ← contoh import class
+
+class ProductController {
+    public function showProduct() {
+        $product = new Product("Kopi Arabika", 25000);
+        echo $product->getInfo();
+    }
+}
