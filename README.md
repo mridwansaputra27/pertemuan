@@ -1,28 +1,46 @@
+{
+  "name": "username/my-php-app",
+  "description": "Contoh project PHP sederhana dengan namespace dan autoload",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "require": {}
+}
 <?php
+namespace App\Models;
 
-namespace App\Math;
+class Product {
+    private string $name;
+    private float $price;
 
-class LuasLingkaran {
-
-    public const phi = 3.14;
-    protected int $jari;
-    
-    public function __construct($isiJari = 1) {
-        $this->jari = $isiJari; //10
+    public function __construct(string $name, float $price) {
+        $this->name  = $name;
+        $this->price = $price;
     }
 
-    public function tampil($nama = 'ban') {
-        $rumus = LuasLingkaran::phi * ($this->jari * $this->jari);
-        echo "Lingkaran {$nama} hasilnya adalah: {$rumus}";
-    }
-
-    public static function testing() {
-        echo "<br/>";
-        echo "ini dari static";
-    }
-
-    public function __destruct() {
-        echo "<br/>";
-        echo "udah ah cape";
+    public function getInfo(): string {
+        return "{$this->name} - Rp" . number_format($this->price, 0, ',', '.');
     }
 }
+<?php
+namespace App\Controllers;
+
+use App\Models\Product; // ← contoh import class
+
+class ProductController {
+    public function showProduct() {
+        $product = new Product("Kopi Arabika", 25000);
+        echo $product->getInfo();
+    }
+}
+<?php
+require __DIR__ . '/../vendor/autoload.php'; // autoload Composer
+
+use App\Controllers\ProductController;
+
+$controller = new ProductController();
+$controller->showProduct();
+
+
